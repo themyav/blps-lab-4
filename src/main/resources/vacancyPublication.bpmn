@@ -24,10 +24,10 @@
     <bpmn2:userTask id="Task_0dfv74n" name="Check the request" camunda:assignee="demo">
       <bpmn2:extensionElements>
         <camunda:formData>
-          <camunda:formField id="login" label="Введите логн" type="string">
+          <camunda:formField id="login" label="Введите логн" type="string" defaultValue="myav">
             <camunda:validation />
           </camunda:formField>
-          <camunda:formField id="password" label="Введите пароль" type="string" />
+          <camunda:formField id="password" label="Введите пароль" type="string" defaultValue="myav" />
         </camunda:formData>
       </bpmn2:extensionElements>
       <bpmn2:incoming>SequenceFlow_1</bpmn2:incoming>

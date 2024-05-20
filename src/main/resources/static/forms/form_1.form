@@ -1,0 +1,69 @@
+{
+  "components": [
+    {
+      "label": "Ваш логин",
+      "type": "textfield",
+      "layout": {
+        "row": "Row_0ss68v7",
+        "columns": null
+      },
+      "id": "Field_0uooksm",
+      "key": "vacancy_login",
+      "defaultValue": "${login}",
+      "readonly": true,
+      "validate": {}
+    },
+    {
+      "label": "Название вакансии",
+      "type": "textfield",
+      "layout": {
+        "row": "Row_1raaaci",
+        "columns": null
+      },
+      "id": "Field_0hxrhrv",
+      "key": "vacancy_name",
+      "description": "Введите название вакансии. Не более 50 символов",
+      "defaultValue": "1C программист",
+      "validate": {
+        "maxLength": "=50",
+        "required": true
+      }
+    },
+    {
+      "label": "Описание вакансии",
+      "type": "textarea",
+      "layout": {
+        "row": "Row_1rtfj2u",
+        "columns": null
+      },
+      "id": "Field_10ms4n7",
+      "key": "textarea_0hziim",
+      "description": "Введите описание вакансии. Не менее 30 символов и не более 1000.",
+      "validate": {
+        "maxLength": 1000,
+        "required": true,
+        "minLength": 30
+      },
+      "defaultValue": "Требуется программист на 1С. Опыт работы от года. Зарплата от 50000 руб. Нужно работать работу."
+    },
+    {
+      "action": "submit",
+      "label": "Отправить",
+      "type": "button",
+      "layout": {
+        "row": "Row_054s82n",
+        "columns": null
+      },
+      "id": "Field_1uqciqc"
+    }
+  ],
+  "type": "default",
+  "id": "Form_0a7ev7d",
+  "exporter": {
+    "name": "Camunda Modeler",
+    "version": "5.23.0"
+  },
+  "executionPlatform": "Camunda Platform",
+  "executionPlatformVersion": "7.21.0",
+  "schemaVersion": 16
+}

@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.camunda.bpm.getstarted.loanapproval;
+package org.camunda.bpm.blps.lab4;
 
 import org.camunda.bpm.engine.RuntimeService;
 import org.camunda.bpm.spring.boot.starter.annotation.EnableProcessApplication;
@@ -26,13 +26,13 @@ import org.springframework.context.event.EventListener;
 
 @SpringBootApplication
 @EnableProcessApplication
-public class WebappExampleProcessApplication {
+public class Lab4Application {
 
   @Autowired
   private RuntimeService runtimeService;
 
   public static void main(String... args) {
-    SpringApplication.run(WebappExampleProcessApplication.class, args);
+    SpringApplication.run(Lab4Application.class, args);
   }
 
   @EventListener

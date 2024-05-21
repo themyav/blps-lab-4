@@ -55,6 +55,16 @@
         "columns": null
       },
       "id": "Field_1hj83v5"
+    },
+    {
+      "label": "Text field",
+      "type": "textfield",
+      "layout": {
+        "row": "Row_1oubuhy",
+        "columns": null
+      },
+      "id": "Field_1604e4v",
+      "key": "myList"
     }
   ],
   "type": "default",

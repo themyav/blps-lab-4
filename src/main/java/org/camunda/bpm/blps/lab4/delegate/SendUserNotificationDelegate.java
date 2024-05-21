@@ -5,9 +5,9 @@ import org.camunda.bpm.engine.delegate.JavaDelegate;
 import org.springframework.stereotype.Component;
 
 @Component
-public class BalanceFreezeDelegate implements JavaDelegate {
+public class SendUserNotificationDelegate implements JavaDelegate {
     @Override
     public void execute(DelegateExecution delegateExecution) throws Exception {
-        System.out.println("balance is frozen");
+        System.out.println("sent user notification");
     }
 }

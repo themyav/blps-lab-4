@@ -1,13 +1,13 @@
-package org.camunda.bpm.blps.lab4.delegate;
+package org.camunda.bpm.blps.lab4.delegate.balance;
 
 import org.camunda.bpm.engine.delegate.DelegateExecution;
 import org.camunda.bpm.engine.delegate.JavaDelegate;
 import org.springframework.stereotype.Component;
 
 @Component
-public class VacancySaveDelegate implements JavaDelegate {
+public class BalanceUpdateDelegate implements JavaDelegate {
     @Override
     public void execute(DelegateExecution delegateExecution) throws Exception {
-        System.out.println("vacancy is saved");
+        System.out.println("balance is updated");
     }
 }

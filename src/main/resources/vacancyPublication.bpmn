@@ -69,7 +69,7 @@
     </bpmn2:sequenceFlow>
     <bpmn2:sequenceFlow id="Flow_0j5kk9e" sourceRef="Activity_1wwr5h8" targetRef="Event_0a663c5" />
     <bpmn2:sequenceFlow id="Flow_1x0fq3t" name="Yes" sourceRef="Gateway_1knvo3d" targetRef="Activity_0pzms0r">
-      <bpmn2:conditionExpression xsi:type="bpmn2:tFormalExpression">${!is_admin}</bpmn2:conditionExpression>
+      <bpmn2:conditionExpression xsi:type="bpmn2:tFormalExpression">${vacancy_action == 'moderation'}</bpmn2:conditionExpression>
     </bpmn2:sequenceFlow>
     <bpmn2:sequenceFlow id="Flow_0fv2ykw" sourceRef="Activity_0pzms0r" targetRef="Gateway_1vpbvf4" />
     <bpmn2:sequenceFlow id="Flow_17ux4i1" sourceRef="Activity_0x79517" targetRef="Activity_0p2fx49" />
@@ -78,10 +78,14 @@
     </bpmn2:sequenceFlow>
     <bpmn2:sequenceFlow id="Flow_1lti95j" sourceRef="Activity_133jw3h" targetRef="Gateway_08jnj7g" />
     <bpmn2:sequenceFlow id="Flow_0kyvgdv" sourceRef="Activity_0gcve3b" targetRef="Gateway_1knvo3d" />
-    <bpmn2:sequenceFlow id="Flow_131xoyi" name="No" sourceRef="Gateway_1knvo3d" targetRef="Activity_0x79517" />
-    <bpmn2:sequenceFlow id="Flow_195zuz3" name="Create vacancy" sourceRef="Gateway_08jnj7g" targetRef="Activity_0gcve3b" />
+    <bpmn2:sequenceFlow id="Flow_131xoyi" name="No" sourceRef="Gateway_1knvo3d" targetRef="Activity_0x79517">
+      <bpmn2:conditionExpression xsi:type="bpmn2:tFormalExpression">${vacancy_action == 'save'}</bpmn2:conditionExpression>
+    </bpmn2:sequenceFlow>
+    <bpmn2:sequenceFlow id="Flow_195zuz3" name="Create vacancy" sourceRef="Gateway_08jnj7g" targetRef="Activity_0gcve3b">
+      <bpmn2:conditionExpression xsi:type="bpmn2:tFormalExpression">${user_action_select == 'create_vacancy'}</bpmn2:conditionExpression>
+    </bpmn2:sequenceFlow>
     <bpmn2:sequenceFlow id="Flow_1te0q7k" name="Update balance" sourceRef="Gateway_08jnj7g" targetRef="balane_form">
-      <bpmn2:conditionExpression xsi:type="bpmn2:tFormalExpression">${!is_admin}</bpmn2:conditionExpression>
+      <bpmn2:conditionExpression xsi:type="bpmn2:tFormalExpression">${user_action_select == 'update_balance'}</bpmn2:conditionExpression>
     </bpmn2:sequenceFlow>
     <bpmn2:sequenceFlow id="Flow_0rxk3dx" sourceRef="balane_form" targetRef="Activity_12ih8yj" />
     <bpmn2:sequenceFlow id="Flow_0g09g3r" sourceRef="Activity_0oaln8d" targetRef="Gateway_1ogxrb1" />
@@ -112,6 +116,7 @@
       <bpmn2:incoming>Flow_0j5kk9e</bpmn2:incoming>
     </bpmn2:endEvent>
     <bpmn2:userTask id="Activity_133jw3h" name="Show user action panel" camunda:formKey="camunda-forms:/forms/user_action.form">
+      <bpmn2:extensionElements />
       <bpmn2:incoming>Flow_1s9kkxr</bpmn2:incoming>
       <bpmn2:incoming>Flow_1ac3phd</bpmn2:incoming>
       <bpmn2:incoming>Flow_0me4851</bpmn2:incoming>
@@ -134,9 +139,9 @@
     <bpmn2:sequenceFlow id="Flow_00hymg4" name="No" sourceRef="Gateway_1vpbvf4" targetRef="Activity_1a1krpk" />
     <bpmn2:sequenceFlow id="Flow_0nggjl7" sourceRef="Activity_1a1krpk" targetRef="Gateway_09avznv" />
     <bpmn2:sequenceFlow id="Flow_1itrh2l" name="No" sourceRef="Gateway_09avznv" targetRef="Activity_0gcve3b">
-      <bpmn2:conditionExpression xsi:type="bpmn2:tFormalExpression">${!is_admin}</bpmn2:conditionExpression>
+      <bpmn2:conditionExpression xsi:type="bpmn2:tFormalExpression">${choose_update_balance == 'no'}</bpmn2:conditionExpression>
     </bpmn2:sequenceFlow>
-    <bpmn2:exclusiveGateway id="Gateway_08jnj7g" name="Which action is chosen?" default="Flow_195zuz3">
+    <bpmn2:exclusiveGateway id="Gateway_08jnj7g" name="Which action is chosen?">
       <bpmn2:incoming>Flow_1lti95j</bpmn2:incoming>
       <bpmn2:outgoing>Flow_195zuz3</bpmn2:outgoing>
       <bpmn2:outgoing>Flow_1te0q7k</bpmn2:outgoing>
@@ -147,19 +152,21 @@
       <bpmn2:incoming>Flow_1fkl31s</bpmn2:incoming>
       <bpmn2:outgoing>Flow_0rxk3dx</bpmn2:outgoing>
     </bpmn2:userTask>
-    <bpmn2:sequenceFlow id="Flow_1fkl31s" name="Yes" sourceRef="Gateway_09avznv" targetRef="balane_form" />
+    <bpmn2:sequenceFlow id="Flow_1fkl31s" name="Yes" sourceRef="Gateway_09avznv" targetRef="balane_form">
+      <bpmn2:conditionExpression xsi:type="bpmn2:tFormalExpression">${choose_update_balance == 'yes'}</bpmn2:conditionExpression>
+    </bpmn2:sequenceFlow>
     <bpmn2:userTask id="Activity_0gcve3b" name="Fill vacancy form" camunda:formKey="camunda-forms:/forms/form_1.form">
       <bpmn2:extensionElements />
       <bpmn2:incoming>Flow_195zuz3</bpmn2:incoming>
       <bpmn2:incoming>Flow_1itrh2l</bpmn2:incoming>
       <bpmn2:outgoing>Flow_0kyvgdv</bpmn2:outgoing>
     </bpmn2:userTask>
-    <bpmn2:exclusiveGateway id="Gateway_09avznv" name="Add money to your balance?" default="Flow_1fkl31s">
+    <bpmn2:exclusiveGateway id="Gateway_09avznv" name="Add money to your balance?">
       <bpmn2:incoming>Flow_0nggjl7</bpmn2:incoming>
       <bpmn2:outgoing>Flow_1itrh2l</bpmn2:outgoing>
       <bpmn2:outgoing>Flow_1fkl31s</bpmn2:outgoing>
     </bpmn2:exclusiveGateway>
-    <bpmn2:exclusiveGateway id="Gateway_1knvo3d" name="Send to moderaton?" default="Flow_131xoyi">
+    <bpmn2:exclusiveGateway id="Gateway_1knvo3d" name="Send to moderaton?">
       <bpmn2:incoming>Flow_0kyvgdv</bpmn2:incoming>
       <bpmn2:outgoing>Flow_131xoyi</bpmn2:outgoing>
       <bpmn2:outgoing>Flow_1x0fq3t</bpmn2:outgoing>
@@ -195,7 +202,7 @@
       <bpmn2:incoming>Flow_0fs7t6w</bpmn2:incoming>
     </bpmn2:endEvent>
     <bpmn2:sequenceFlow id="Flow_0fs7t6w" name="Exit" sourceRef="Gateway_08jnj7g" targetRef="Event_11yy548">
-      <bpmn2:conditionExpression xsi:type="bpmn2:tFormalExpression">${is_admin}</bpmn2:conditionExpression>
+      <bpmn2:conditionExpression xsi:type="bpmn2:tFormalExpression">${user_action_select == 'exit_app'}</bpmn2:conditionExpression>
     </bpmn2:sequenceFlow>
     <bpmn2:sequenceFlow id="Flow_00e9sfm" name="Yes" sourceRef="Gateway_1vpbvf4" targetRef="Activity_0nto2ok">
       <bpmn2:conditionExpression xsi:type="bpmn2:tFormalExpression">${!is_admin}</bpmn2:conditionExpression>
@@ -310,7 +317,7 @@
       <bpmndi:BPMNShape id="Gateway_1knvo3d_di" bpmnElement="Gateway_1knvo3d" isMarkerVisible="true">
         <dc:Bounds x="1515" y="475" width="50" height="50" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="1445.5" y="486.5" width="59" height="27" />
+          <dc:Bounds x="1446" y="487" width="59" height="27" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_0n9kne6_di" bpmnElement="Activity_0p2fx49">

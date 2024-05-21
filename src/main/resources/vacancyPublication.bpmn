@@ -156,7 +156,11 @@
       <bpmn2:conditionExpression xsi:type="bpmn2:tFormalExpression">${choose_update_balance == 'yes'}</bpmn2:conditionExpression>
     </bpmn2:sequenceFlow>
     <bpmn2:userTask id="Activity_0gcve3b" name="Fill vacancy form" camunda:formKey="camunda-forms:/forms/form_1.form">
-      <bpmn2:extensionElements />
+      <bpmn2:extensionElements>
+        <camunda:inputOutput>
+          <camunda:inputParameter name="login">${login}</camunda:inputParameter>
+        </camunda:inputOutput>
+      </bpmn2:extensionElements>
       <bpmn2:incoming>Flow_195zuz3</bpmn2:incoming>
       <bpmn2:incoming>Flow_1itrh2l</bpmn2:incoming>
       <bpmn2:outgoing>Flow_0kyvgdv</bpmn2:outgoing>

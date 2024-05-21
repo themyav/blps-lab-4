@@ -18,10 +18,10 @@
         "columns": null
       },
       "id": "Field_0uooksm",
-      "key": "vacancy_login",
-      "defaultValue": "${login}",
+      "key": "login",
       "readonly": true,
-      "validate": {}
+      "validate": {},
+      "properties": {}
     },
     {
       "label": "Название вакансии",

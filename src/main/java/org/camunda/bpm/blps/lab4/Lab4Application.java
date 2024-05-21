@@ -37,7 +37,7 @@ public class Lab4Application {
 
   @EventListener
   public void processPostDeploy(PostDeployEvent event) {
-    runtimeService.startProcessInstanceByKey("loanApproval");
+    runtimeService.startProcessInstanceByKey("vacancySending");
   }
 
 }

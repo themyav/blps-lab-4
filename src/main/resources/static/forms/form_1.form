@@ -1,6 +1,16 @@
 {
   "components": [
     {
+      "text": "# Создание вакансии",
+      "label": "Text view",
+      "type": "text",
+      "layout": {
+        "row": "Row_1g4hajq",
+        "columns": null
+      },
+      "id": "Field_0p8v0lc"
+    },
+    {
       "label": "Ваш логин",
       "type": "textfield",
       "layout": {
@@ -37,7 +47,7 @@
         "columns": null
       },
       "id": "Field_10ms4n7",
-      "key": "textarea_0hziim",
+      "key": "vacancy_desciption",
       "description": "Введите описание вакансии. Не менее 30 символов и не более 1000.",
       "validate": {
         "maxLength": 1000,
@@ -45,6 +55,30 @@
         "minLength": 30
       },
       "defaultValue": "Требуется программист на 1С. Опыт работы от года. Зарплата от 50000 руб. Нужно работать работу."
+    },
+    {
+      "values": [
+        {
+          "label": "Да",
+          "value": "moderation"
+        },
+        {
+          "label": "Нет, сохранить",
+          "value": "save"
+        }
+      ],
+      "label": "Отправить на модерацию?",
+      "type": "select",
+      "layout": {
+        "row": "Row_00rfxgk",
+        "columns": null
+      },
+      "id": "Field_0sze4iy",
+      "key": "vacancy_action",
+      "defaultValue": "save",
+      "validate": {
+        "required": true
+      }
     },
     {
       "action": "submit",
@@ -58,7 +92,7 @@
     }
   ],
   "type": "default",
-  "id": "Form_0a7ev7d",
+  "id": "vacancy_form",
   "exporter": {
     "name": "Camunda Modeler",
     "version": "5.23.0"

@@ -1,0 +1,52 @@
+{
+  "components": [
+    {
+      "text": "# Пополнение баланса",
+      "label": "Text view",
+      "type": "text",
+      "layout": {
+        "row": "Row_0epykub",
+        "columns": null
+      },
+      "id": "Field_0ca7yr3"
+    },
+    {
+      "label": "Введите сумму пополнения в рублях",
+      "type": "number",
+      "layout": {
+        "row": "Row_0o98hke",
+        "columns": null
+      },
+      "id": "Field_0us7o9o",
+      "key": "number_balance",
+      "decimalDigits": 2,
+      "defaultValue": 200,
+      "increment": "0.01",
+      "validate": {
+        "required": true,
+        "min": 0.01,
+        "max": 10000
+      },
+      "description": "Не менее 0.01 руб и не более 10000 руб"
+    },
+    {
+      "action": "submit",
+      "label": "Пополнить",
+      "type": "button",
+      "layout": {
+        "row": "Row_10bgm3i",
+        "columns": null
+      },
+      "id": "Field_0ibm28b"
+    }
+  ],
+  "type": "default",
+  "id": "Form_13b4w43",
+  "exporter": {
+    "name": "Camunda Modeler",
+    "version": "5.23.0"
+  },
+  "executionPlatform": "Camunda Platform",
+  "executionPlatformVersion": "7.21.0",
+  "schemaVersion": 16
+}

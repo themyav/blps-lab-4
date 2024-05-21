@@ -1,0 +1,45 @@
+{
+  "components": [
+    {
+      "text": "# На вашем балансе не достаточно средств!\nХотите пополнить баланс, чтобы отправить вакансию на модерацию?",
+      "label": "Text view",
+      "type": "text",
+      "layout": {
+        "row": "Row_07pzb36",
+        "columns": null
+      },
+      "id": "Field_1a0wvxv"
+    },
+    {
+      "values": [
+        {
+          "label": "Да",
+          "value": "yes"
+        },
+        {
+          "label": "Нет",
+          "value": "no"
+        }
+      ],
+      "label": "Выберите опцию",
+      "type": "select",
+      "layout": {
+        "row": "Row_0yv0jht",
+        "columns": null
+      },
+      "id": "Field_0nzl9uk",
+      "key": "choose_update_balance",
+      "defaultValue": "yes",
+      "description": "При согласии вы будете перенаправлены на страницу пополнения баланса, иначе — возвращены к заполнению вакансии"
+    }
+  ],
+  "type": "default",
+  "id": "Form_0mpy839",
+  "exporter": {
+    "name": "Camunda Modeler",
+    "version": "5.23.0"
+  },
+  "executionPlatform": "Camunda Platform",
+  "executionPlatformVersion": "7.21.0",
+  "schemaVersion": 16
+}

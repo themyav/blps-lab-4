@@ -1,0 +1,69 @@
+{
+  "components": [
+    {
+      "text": "# Главная страница пользователя",
+      "label": "Text view",
+      "type": "text",
+      "layout": {
+        "row": "Row_1cv1rm8",
+        "columns": null
+      },
+      "id": "Field_07r8btv"
+    },
+    {
+      "values": [
+        {
+          "label": "Создать вакансию",
+          "value": "create_vacancy"
+        },
+        {
+          "label": "Пополнить баланс",
+          "value": "update_balance"
+        },
+        {
+          "label": "Выйти из приложения",
+          "value": "exit_app"
+        }
+      ],
+      "label": "Выберите действие",
+      "type": "select",
+      "layout": {
+        "row": "Row_1bcww5x",
+        "columns": null
+      },
+      "id": "Field_0hyperq",
+      "key": "user_action_select",
+      "defaultValue": "create_vacancy"
+    },
+    {
+      "action": "submit",
+      "label": "Продолжить",
+      "type": "button",
+      "layout": {
+        "row": "Row_1bdrzuy",
+        "columns": null
+      },
+      "id": "Field_0uectra",
+      "properties": {}
+    },
+    {
+      "action": "reset",
+      "label": "Сбросить",
+      "type": "button",
+      "layout": {
+        "row": "Row_1bdrzuy",
+        "columns": null
+      },
+      "id": "Field_1hj83v5"
+    }
+  ],
+  "type": "default",
+  "id": "Form_03s4r8g",
+  "exporter": {
+    "name": "Camunda Modeler",
+    "version": "5.23.0"
+  },
+  "executionPlatform": "Camunda Platform",
+  "executionPlatformVersion": "7.21.0",
+  "schemaVersion": 16
+}

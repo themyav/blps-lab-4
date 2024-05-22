@@ -14,7 +14,6 @@
         <bpmn2:flowNodeRef>Gateway_1ogxrb1</bpmn2:flowNodeRef>
         <bpmn2:flowNodeRef>Activity_0oaln8d</bpmn2:flowNodeRef>
         <bpmn2:flowNodeRef>Activity_12ih8yj</bpmn2:flowNodeRef>
-        <bpmn2:flowNodeRef>Activity_0x79517</bpmn2:flowNodeRef>
         <bpmn2:flowNodeRef>Activity_0pzms0r</bpmn2:flowNodeRef>
         <bpmn2:flowNodeRef>Gateway_1vpbvf4</bpmn2:flowNodeRef>
         <bpmn2:flowNodeRef>Activity_0nto2ok</bpmn2:flowNodeRef>
@@ -27,6 +26,8 @@
         <bpmn2:flowNodeRef>Activity_0t2iz9k</bpmn2:flowNodeRef>
         <bpmn2:flowNodeRef>Event_0r7kzef</bpmn2:flowNodeRef>
         <bpmn2:flowNodeRef>Event_1bx6umh</bpmn2:flowNodeRef>
+        <bpmn2:flowNodeRef>Activity_0x79517</bpmn2:flowNodeRef>
+        <bpmn2:flowNodeRef>Event_11hjtk1</bpmn2:flowNodeRef>
       </bpmn2:lane>
       <bpmn2:lane id="Lane_1jkokjd" name="Client">
         <bpmn2:flowNodeRef>StartEvent_1</bpmn2:flowNodeRef>
@@ -36,14 +37,14 @@
         <bpmn2:flowNodeRef>Activity_0eayr2s</bpmn2:flowNodeRef>
         <bpmn2:flowNodeRef>Gateway_08jnj7g</bpmn2:flowNodeRef>
         <bpmn2:flowNodeRef>balane_form</bpmn2:flowNodeRef>
-        <bpmn2:flowNodeRef>Activity_0gcve3b</bpmn2:flowNodeRef>
         <bpmn2:flowNodeRef>Gateway_09avznv</bpmn2:flowNodeRef>
         <bpmn2:flowNodeRef>Gateway_1knvo3d</bpmn2:flowNodeRef>
-        <bpmn2:flowNodeRef>Activity_0p2fx49</bpmn2:flowNodeRef>
         <bpmn2:flowNodeRef>Activity_1a1krpk</bpmn2:flowNodeRef>
         <bpmn2:flowNodeRef>Event_11yy548</bpmn2:flowNodeRef>
         <bpmn2:flowNodeRef>Activity_12xvs2e</bpmn2:flowNodeRef>
         <bpmn2:flowNodeRef>Event_11iskeg</bpmn2:flowNodeRef>
+        <bpmn2:flowNodeRef>Activity_0p2fx49</bpmn2:flowNodeRef>
+        <bpmn2:flowNodeRef>Activity_0gcve3b</bpmn2:flowNodeRef>
       </bpmn2:lane>
     </bpmn2:laneSet>
     <bpmn2:exclusiveGateway id="Gateway_1ogxrb1" name="Is this user or moderator?">
@@ -133,7 +134,7 @@
     <bpmn2:userTask id="Activity_0eayr2s" name="Show balance updating result page">
       <bpmn2:extensionElements>
         <camunda:formData>
-          <camunda:formField id="balance_status" label="Статус вашего баланса" type="string" defaultValue="Баланс может пополнен, а может нет" />
+          <camunda:formField id="balance_status" label="Статус пополнения баланса" type="string" defaultValue="${message}" />
         </camunda:formData>
       </bpmn2:extensionElements>
       <bpmn2:incoming>Flow_0l5jhhh</bpmn2:incoming>
@@ -160,16 +161,6 @@
     <bpmn2:sequenceFlow id="Flow_1fkl31s" name="Yes" sourceRef="Gateway_09avznv" targetRef="balane_form">
       <bpmn2:conditionExpression xsi:type="bpmn2:tFormalExpression">${choose_update_balance == 'yes'}</bpmn2:conditionExpression>
     </bpmn2:sequenceFlow>
-    <bpmn2:userTask id="Activity_0gcve3b" name="Fill vacancy form" camunda:formKey="camunda-forms:/forms/form_1.form">
-      <bpmn2:extensionElements>
-        <camunda:inputOutput>
-          <camunda:inputParameter name="login">${login}</camunda:inputParameter>
-        </camunda:inputOutput>
-      </bpmn2:extensionElements>
-      <bpmn2:incoming>Flow_195zuz3</bpmn2:incoming>
-      <bpmn2:incoming>Flow_1itrh2l</bpmn2:incoming>
-      <bpmn2:outgoing>Flow_0kyvgdv</bpmn2:outgoing>
-    </bpmn2:userTask>
     <bpmn2:exclusiveGateway id="Gateway_09avznv" name="Add money to your balance?">
       <bpmn2:incoming>Flow_0nggjl7</bpmn2:incoming>
       <bpmn2:outgoing>Flow_1itrh2l</bpmn2:outgoing>
@@ -180,23 +171,7 @@
       <bpmn2:outgoing>Flow_131xoyi</bpmn2:outgoing>
       <bpmn2:outgoing>Flow_1x0fq3t</bpmn2:outgoing>
     </bpmn2:exclusiveGateway>
-    <bpmn2:userTask id="Activity_0p2fx49" name="Show saved as draft page">
-      <bpmn2:extensionElements>
-        <camunda:formData>
-          <camunda:formField id="success_save" label="Ваша вакансия сохранена как черновик" type="string" defaultValue="вот так" />
-        </camunda:formData>
-      </bpmn2:extensionElements>
-      <bpmn2:incoming>Flow_17ux4i1</bpmn2:incoming>
-      <bpmn2:outgoing>Flow_0me4851</bpmn2:outgoing>
-    </bpmn2:userTask>
     <bpmn2:sequenceFlow id="Flow_0me4851" sourceRef="Activity_0p2fx49" targetRef="Activity_133jw3h" />
-    <bpmn2:serviceTask id="Activity_0x79517" name="save vacancy draft to DB" camunda:delegateExpression="${vacancySaveDelegate}">
-      <bpmn2:incoming>Flow_131xoyi</bpmn2:incoming>
-      <bpmn2:outgoing>Flow_17ux4i1</bpmn2:outgoing>
-      <bpmn2:dataOutputAssociation id="DataOutputAssociation_1th071z">
-        <bpmn2:targetRef>vacancy_database</bpmn2:targetRef>
-      </bpmn2:dataOutputAssociation>
-    </bpmn2:serviceTask>
     <bpmn2:serviceTask id="Activity_0pzms0r" name="get user balance" camunda:delegateExpression="${balanceGetDelegate}">
       <bpmn2:incoming>Flow_1x0fq3t</bpmn2:incoming>
       <bpmn2:outgoing>Flow_0fv2ykw</bpmn2:outgoing>
@@ -320,12 +295,48 @@
       <bpmn2:outgoing>Flow_16m9dgk</bpmn2:outgoing>
       <bpmn2:errorEventDefinition id="ErrorEventDefinition_0bta9e8" errorRef="Error_0i0pqcr" />
     </bpmn2:boundaryEvent>
+    <bpmn2:userTask id="Activity_0p2fx49" name="Show saved as draft page">
+      <bpmn2:extensionElements>
+        <camunda:formData>
+          <camunda:formField id="success_save" label="Ваша вакансия сохранена как черновик" type="string" defaultValue="вот так" />
+          <camunda:formField id="view_saved_id" label="id" type="string" defaultValue="${saved_id}" />
+          <camunda:formField id="view_saved_title" label="Заголовок вакансии" type="string" defaultValue="${saved_title}" />
+          <camunda:formField id="view_saved_description" label="Описание" type="string" defaultValue="${saved_description}" />
+        </camunda:formData>
+      </bpmn2:extensionElements>
+      <bpmn2:incoming>Flow_17ux4i1</bpmn2:incoming>
+      <bpmn2:outgoing>Flow_0me4851</bpmn2:outgoing>
+    </bpmn2:userTask>
+    <bpmn2:serviceTask id="Activity_0x79517" name="save vacancy draft to DB" camunda:delegateExpression="${vacancySaveDelegate}">
+      <bpmn2:incoming>Flow_131xoyi</bpmn2:incoming>
+      <bpmn2:outgoing>Flow_17ux4i1</bpmn2:outgoing>
+      <bpmn2:dataOutputAssociation id="DataOutputAssociation_1th071z">
+        <bpmn2:targetRef>vacancy_database</bpmn2:targetRef>
+      </bpmn2:dataOutputAssociation>
+    </bpmn2:serviceTask>
+    <bpmn2:boundaryEvent id="Event_11hjtk1" attachedToRef="Activity_0x79517">
+      <bpmn2:outgoing>Flow_15og8qa</bpmn2:outgoing>
+      <bpmn2:errorEventDefinition id="ErrorEventDefinition_1knbqa2" errorRef="Error_0tqgtcj" />
+    </bpmn2:boundaryEvent>
+    <bpmn2:sequenceFlow id="Flow_15og8qa" sourceRef="Event_11hjtk1" targetRef="Activity_0gcve3b" />
+    <bpmn2:userTask id="Activity_0gcve3b" name="Fill vacancy form" camunda:formKey="camunda-forms:/forms/form_1.form">
+      <bpmn2:extensionElements>
+        <camunda:inputOutput>
+          <camunda:inputParameter name="login">${login}</camunda:inputParameter>
+        </camunda:inputOutput>
+      </bpmn2:extensionElements>
+      <bpmn2:incoming>Flow_195zuz3</bpmn2:incoming>
+      <bpmn2:incoming>Flow_1itrh2l</bpmn2:incoming>
+      <bpmn2:incoming>Flow_15og8qa</bpmn2:incoming>
+      <bpmn2:outgoing>Flow_0kyvgdv</bpmn2:outgoing>
+    </bpmn2:userTask>
   </bpmn2:process>
   <bpmn2:message id="Message_3u38130" name="Message_3u38130" />
   <bpmn2:message id="Message_0v2k0b8" name="test_message" />
   <bpmn2:message id="Message_3unjf4e" name="ActionService1" />
   <bpmn2:message id="Message_0es257v" name="Message_0es257v" />
   <bpmn2:error id="Error_0i0pqcr" name="Too_Less" errorCode="Too_Less" />
+  <bpmn2:error id="Error_0tqgtcj" name="Incorrect_Vacancy" errorCode="Incorrect_Vacancy" />
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
     <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Collaboration_186xbut">
       <bpmndi:BPMNShape id="Participant_0pmnbin_di" bpmnElement="Participant_0pmnbin" isHorizontal="true">
@@ -405,12 +416,6 @@
           <dc:Bounds x="1446" y="487" width="59" height="27" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_0n9kne6_di" bpmnElement="Activity_0p2fx49">
-        <dc:Bounds x="1250" y="460" width="100" height="80" />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_1s1pew1_di" bpmnElement="Activity_0x79517">
-        <dc:Bounds x="1250" y="640" width="100" height="80" />
-      </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_1pvub4n_di" bpmnElement="Activity_0pzms0r">
         <dc:Bounds x="1610" y="690" width="100" height="80" />
         <bpmndi:BPMNLabel />
@@ -485,8 +490,17 @@
       <bpmndi:BPMNShape id="Event_0r7kzef_di" bpmnElement="Event_0r7kzef">
         <dc:Bounds x="502" y="932" width="36" height="36" />
       </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0n9kne6_di" bpmnElement="Activity_0p2fx49">
+        <dc:Bounds x="1180" y="460" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1s1pew1_di" bpmnElement="Activity_0x79517">
+        <dc:Bounds x="1310" y="640" width="100" height="80" />
+      </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Event_1bx6umh_di" bpmnElement="Event_1bx6umh">
         <dc:Bounds x="682" y="632" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_11hjtk1_di" bpmnElement="Event_11hjtk1">
+        <dc:Bounds x="1362" y="622" width="36" height="36" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="Flow_12rxs3j_di" bpmnElement="Flow_12rxs3j">
         <di:waypoint x="1095" y="810" />
@@ -509,8 +523,9 @@
         <di:waypoint x="1815" y="730" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_17ux4i1_di" bpmnElement="Flow_17ux4i1">
-        <di:waypoint x="1300" y="640" />
-        <di:waypoint x="1300" y="540" />
+        <di:waypoint x="1310" y="680" />
+        <di:waypoint x="1230" y="680" />
+        <di:waypoint x="1230" y="540" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_1s9kkxr_di" bpmnElement="Flow_1s9kkxr">
         <di:waypoint x="1070" y="785" />
@@ -530,16 +545,19 @@
       <bpmndi:BPMNEdge id="Flow_131xoyi_di" bpmnElement="Flow_131xoyi">
         <di:waypoint x="1540" y="525" />
         <di:waypoint x="1540" y="680" />
-        <di:waypoint x="1350" y="680" />
+        <di:waypoint x="1410" y="680" />
         <bpmndi:BPMNLabel>
           <dc:Bounds x="1548" y="553" width="15" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_195zuz3_di" bpmnElement="Flow_195zuz3">
         <di:waypoint x="1095" y="360" />
-        <di:waypoint x="1490" y="360" />
+        <di:waypoint x="1180" y="360" />
+        <di:waypoint x="1180" y="290" />
+        <di:waypoint x="1540" y="290" />
+        <di:waypoint x="1540" y="320" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="1214" y="363" width="77" height="14" />
+          <dc:Bounds x="1285" y="293" width="77" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_1te0q7k_di" bpmnElement="Flow_1te0q7k">
@@ -622,7 +640,7 @@
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_0me4851_di" bpmnElement="Flow_0me4851">
-        <di:waypoint x="1250" y="500" />
+        <di:waypoint x="1180" y="500" />
         <di:waypoint x="1120" y="500" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_0fs7t6w_di" bpmnElement="Flow_0fs7t6w">
@@ -694,13 +712,18 @@
         <di:waypoint x="670" y="360" />
         <di:waypoint x="700" y="360" />
       </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_15og8qa_di" bpmnElement="Flow_15og8qa">
+        <di:waypoint x="1380" y="622" />
+        <di:waypoint x="1380" y="360" />
+        <di:waypoint x="1490" y="360" />
+      </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="DataOutputAssociation_0pd6qim_di" bpmnElement="DataOutputAssociation_0pd6qim">
         <di:waypoint x="800" y="663" />
         <di:waypoint x="1395" y="815" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="DataOutputAssociation_1th071z_di" bpmnElement="DataOutputAssociation_1th071z">
-        <di:waypoint x="1334" y="720" />
-        <di:waypoint x="1395" y="792" />
+        <di:waypoint x="1375" y="720" />
+        <di:waypoint x="1400" y="785" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="DataInputAssociation_1mg8pv8_di" bpmnElement="DataInputAssociation_1mg8pv8">
         <di:waypoint x="1445" y="800" />

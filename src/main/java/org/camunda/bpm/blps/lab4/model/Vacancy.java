@@ -20,6 +20,10 @@ public class Vacancy {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    public void setAuthorId(Long authorId) {
+        this.authorId = authorId;
+    }
+
     @Column(nullable = false)
     private Long authorId;
 

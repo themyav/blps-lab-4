@@ -1,0 +1,50 @@
+{
+  "components": [
+    {
+      "text": "# Модерация вакансии",
+      "label": "Text view",
+      "type": "text",
+      "layout": {
+        "row": "Row_0s93nlb",
+        "columns": null
+      },
+      "id": "Field_1b42d7u"
+    },
+    {
+      "label": "Введите id вакансии для модерации",
+      "type": "number",
+      "layout": {
+        "row": "Row_005h4kx",
+        "columns": null
+      },
+      "id": "Field_00hhbul",
+      "key": "moderation_form",
+      "decimalDigits": 0,
+      "increment": "1",
+      "validate": {
+        "required": true,
+        "min": 1
+      },
+      "defaultValue": 1
+    },
+    {
+      "action": "submit",
+      "label": "Перейти к вакансии",
+      "type": "button",
+      "layout": {
+        "row": "Row_1h0ndnp",
+        "columns": null
+      },
+      "id": "Field_0swdmwp"
+    }
+  ],
+  "type": "default",
+  "id": "Form_0rrfryv",
+  "exporter": {
+    "name": "Camunda Modeler",
+    "version": "5.23.0"
+  },
+  "executionPlatform": "Camunda Platform",
+  "executionPlatformVersion": "7.21.0",
+  "schemaVersion": 16
+}

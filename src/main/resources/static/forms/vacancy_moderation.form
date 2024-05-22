@@ -1,0 +1,101 @@
+{
+  "components": [
+    {
+      "text": "# Модерация вакансии",
+      "label": "Text view",
+      "type": "text",
+      "layout": {
+        "row": "Row_0cucs9a",
+        "columns": null
+      },
+      "id": "Field_0mcvfuv"
+    },
+    {
+      "label": "ID",
+      "type": "textfield",
+      "layout": {
+        "row": "Row_0yo7jsy",
+        "columns": null
+      },
+      "id": "Field_0lo7drp",
+      "key": "current_vacancy_id",
+      "readonly": true
+    },
+    {
+      "label": "Название",
+      "type": "textfield",
+      "layout": {
+        "row": "Row_1mnxvmm",
+        "columns": null
+      },
+      "id": "Field_1pmcewh",
+      "key": "current_vacancy_title",
+      "readonly": true
+    },
+    {
+      "label": "Описание",
+      "type": "textarea",
+      "layout": {
+        "row": "Row_1gi2rof",
+        "columns": null
+      },
+      "id": "Field_054zskh",
+      "key": "current_vacancy_description",
+      "readonly": true
+    },
+    {
+      "values": [
+        {
+          "label": "Принять",
+          "value": "accept"
+        },
+        {
+          "label": "Отклонить",
+          "value": "decline"
+        }
+      ],
+      "label": "Выберите опцию",
+      "type": "select",
+      "layout": {
+        "row": "Row_0t7u9tm",
+        "columns": null
+      },
+      "id": "Field_153llxi",
+      "key": "moderator_choice",
+      "defaultValue": "accept"
+    },
+    {
+      "label": "Ваш комментарий",
+      "type": "textarea",
+      "layout": {
+        "row": "Row_1m82xhr",
+        "columns": null
+      },
+      "id": "Field_1f35h9i",
+      "key": "moderator_comment",
+      "conditional": {
+        "hide": "=moderator_choice=\"accept\""
+      },
+      "defaultValue": "Данная вакансия содержит ненормативную лексику"
+    },
+    {
+      "action": "submit",
+      "label": "Button",
+      "type": "button",
+      "layout": {
+        "row": "Row_0f59bp3",
+        "columns": null
+      },
+      "id": "Field_1fqxpbq"
+    }
+  ],
+  "type": "default",
+  "id": "Form_10c8m85",
+  "exporter": {
+    "name": "Camunda Modeler",
+    "version": "5.23.0"
+  },
+  "executionPlatform": "Camunda Platform",
+  "executionPlatformVersion": "7.21.0",
+  "schemaVersion": 16
+}

@@ -43,6 +43,10 @@ public class VacancyService {
         return vacancyRepository.findAll().stream().filter(Vacancy::isOnModeration).toList();
     }
 
+    public Vacancy getById(Long id){
+        return vacancyRepository.getById(id);
+    }
+
     public Result validateVacancy(Vacancy vacancy){
         if(vacancy.getAuthorId() == null) return Result.NO_VACANCY_AUTHOR;
         if(vacancy.getTitle() == null) return Result.NO_VACANCY_TITLE;

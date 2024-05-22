@@ -64,6 +64,9 @@ public class SetupDataLoader implements
         user.setRoles(Collections.singletonList(roleService.findByName("USER")));
         userService.save(user);
 
+        balanceService.deposit(user.getId(), 300.0);
+
+
         Vacancy dvornik = new Vacancy(user, "Дворник", "Мести пол");
         dvornik.setOnModeration(true);
         vacancyService.sendToModeration(dvornik);

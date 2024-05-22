@@ -17,7 +17,7 @@ import java.util.Objects;
 public class BalanceService {
 
     public final Double PUBLISH_COST = 100.0;
-    public final Double MIN_DEPOSIT = 1.0;
+    public final Double MIN_DEPOSIT = 0.1;
 
     @Autowired
     public final TransactionTemplate transactionTemplate;
